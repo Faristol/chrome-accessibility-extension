@@ -4,7 +4,7 @@
   IncluVision
 </h1>
 <div align="center">
-<img src="https://github.com/Faristol/chrome-accessibility-extension/blob/main/screenshots/screenshot_1.png?raw=true" alt="img" style=" height: 500px">
+<img src="https://github.com/Faristol/chrome-accessibility-extension/blob/main/accessibility_extension/screenshots/screenshot_1.png?raw=true" alt="img" style=" height: 500px">
 </div>
 
 ## Description
