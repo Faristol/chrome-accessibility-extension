@@ -1,11 +1,10 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U7U0XZDPY)
 <h1 align="center">
-  <img src="https://github.com/Faristol/firefox-accessibility-extension/blob/main/accessibility_extension/icons/eye128.png?raw=true" alt="icon" style="width: 128px; height: 128px"><br>
+  <img src="https://github.com/Faristol/chrome-accessibility-extension/blob/main/accessibility_extension/icons/eye128.png?raw=true" alt="icon" style="width: 128px; height: 128px"><br>
   IncluVision
 </h1>
 <div align="center">
-<img src="https://github.com/Faristol/firefox-accessibility-extension/blob/main/screenshots/screenshot_1.png?raw=true" alt="img" style=" height: 500px">
-<img src="https://github.com/Faristol/firefox-accessibility-extension/blob/main/screenshots/screenshot_2.png?raw=true" alt="img" style=" height: 500px">
+<img src="https://github.com/Faristol/chrome-accessibility-extension/blob/main/screenshots/screenshot_1.png?raw=true" alt="img" style=" height: 500px">
 </div>
 
 ## Description
@@ -17,18 +16,17 @@ This extension acts as a **multipurpose accessibility extension**, these are the
 - **Invert colors**
 - Changes the **font** (Arial, OpenDyslexic, Atkinson Hyperlegible)
 - **Reproduce** the text of the page with and without summarization. The extension incorporates an **AI summarization model called BART**
-- Incorpores a **adblocker** with a 97% of effectiveness
 
 # Installation
 
-You can download it from the firefox marketplace or run it locally:
+You can download it from the chrome marketplace or run it locally:
 
 To load the extension:
 
 1. Download the `accessibility_extension` directory
-2. Enter the URL `about:debugging#/runtime/this-firefox` in your firefox browser.
-3. Click on `Load Temporary Add-on`.
-4. Select the `manifest.json` file.
+2. Enter the URL `chrome://extensions/` in your chrome browser.
+3. Click on `Uncompressed load`.
+4. Select the `accessibility_extension` directory.
 5. Press `Reload`.
 
 ## To run the AI summarize model:
@@ -100,12 +98,9 @@ curl -X POST http://YOUR_SERVER_IP:5000/sumup -H "Content-Type: application/json
 ```
 ## Notes
 
-You've encountered some issues with the extension on Linux:
+You've encountered some issues with the extension:
 
 * When applying contrast, particularly on pages like Wikipedia, a manual refresh is necessary. Otherwise, while the background color changes to black, the text remains unaffected and doesn't switch to white.
-* The pause and resume buttons aren't functional. These buttons trigger the pause() and resume() functions, both of which are related to speechSynthesis.
-
-Additionally, it's worth noting that the extension works fine on Windows.
 
 ## Help
 
