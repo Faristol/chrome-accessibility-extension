@@ -2,8 +2,6 @@ const SIZES = ["small", "medium", "large", "x-large", "xx-large", "xxx-large"];
 const FONTS = ["arial", "opendyslexic", "hyperlegible"];
 let utterance = null;
 let synth = window.speechSynthesis;
-let API_URL = null;
-let API_KEY = null;
 /*
 ->FUNCTIONS THAT OPERATES WITH THE CHROME STORAGE (read,write,remove)
 ->INITIAL CALL TO READ THE LOCAL STORAGE AND ADD THE STYLES STORED TOT THE CURRENT PAGE
@@ -47,21 +45,6 @@ const removeLocalStorage = async (key) => {
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", afterDOMLoaded);
 } else {
-  const URL_KEY = chrome.runtime.getURL("url_key.json");
-  fetch(URL_KEY)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      API_URL = data.API_URL;
-      API_KEY = data.API_KEY;
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
   afterDOMLoaded();
   appendFonts();
 }
@@ -116,35 +99,6 @@ chrome.runtime.onMessage.addListener((message) => {
   const keys = Object.keys(message);
   const value = message[keys[0]];
   //if user press play, stop ... handle it different
-  //summary text with AI
-  if (keys[0] === "action_ai") {
-    switch (value) {
-      case "play":
-        const text = extractText();
-        sumup(text);
-        break;
-      case "pause":
-        if (utterance) {
-          synth.pause();
-          //functions pause and resume don't work in linux
-        }
-
-        break;
-      case "resume":
-        if (utterance) {
-          synth.resume();
-        }
-
-        break;
-      case "cancel":
-        if (utterance) {
-          synth.cancel();
-          utterance = null;
-        }
-        break;
-    }
-    return;
-  }
   //reproduce normal text
   if (keys[0] === "action") {
     switch (value) {
@@ -212,40 +166,6 @@ function utterancePlay(text) {
     utterance.voice = synth.getVoices()[0];
     synth.speak(utterance);
   }
-}
-/*
-
-This function sends a POST request to a specified API endpoint with the provided text. 
-Upon receiving a successful response, it extracts the summary 
-from the response data and initiates speech synthesis.
-*/
-function sumup(text) {
-  let payload = {
-    text: text,
-  };
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": API_KEY,
-    },
-    body: JSON.stringify(payload),
-  };
-  fetch(API_URL, requestOptions)
-    .then((response) => {
-      if (!response.ok) {
-        console.error("Error:", response.status, response.statusText);
-        throw new Error("Request failed");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const summary = data.summary;
-      utterancePlay(summary);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
 }
 function changeProperty(cssClass) {
   //in some pages, like wikipedia, the contrast don't work properly. To apply it, reload the page
