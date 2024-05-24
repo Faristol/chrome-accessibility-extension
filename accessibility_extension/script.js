@@ -5,7 +5,7 @@ let synth = window.speechSynthesis;
 let API_URL = null;
 let API_KEY = null;
 /*
-->FUNCTIONS THAT OPERATES WITH THE FIREFOX STORAGE (read,write,remove)
+->FUNCTIONS THAT OPERATES WITH THE CHROME STORAGE (read,write,remove)
 ->INITIAL CALL TO READ THE LOCAL STORAGE AND ADD THE STYLES STORED TOT THE CURRENT PAGE
 ->FUNCTION THAT LISTENS MESSAGES FROM THE POPUP AND APPLIES THE SYLES OR REMOVE THEM
   ->AUX FUNCTIONS CALLED IN THE LISTENER GENERAL FUNCTION
@@ -58,7 +58,6 @@ if (document.readyState === "loading") {
     .then((data) => {
       API_URL = data.API_URL;
       API_KEY = data.API_KEY;
-      console.log(API_URL, API_KEY);
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
