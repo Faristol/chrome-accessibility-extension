@@ -1,0 +1,39 @@
+
+.contrast{
+    background-color: black !important;
+    color: white !important;
+}
+.bold{
+    font-weight: bolder !important;
+}
+.small{
+    font-size: small !important;
+}
+.medium{
+    font-size: medium !important;
+}
+.large{
+    font-size: large !important;
+}
+.x-large{
+    font-size: x-large !important;
+}
+.xx-large{
+    font-size: xx-large !important;
+}
+.xxx-large{
+    font-size: xxx-large !important;
+}
+.invert{
+    filter: invert(100%) !important;
+}
+
+.arial{
+    font-family: Arial !important;
+}
+.opendyslexic {
+    font-family: 'opendyslexic',sans-serif !important;
+  }
+.hyperlegible{
+    font-family: 'hyperlegible', sans-serif !important;
+}
