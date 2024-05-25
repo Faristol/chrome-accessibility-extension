@@ -29,10 +29,6 @@ const initializeEvents = () => {
         { selector: "#reset-bold", message: { bold: "reset" } },
         { selector: "#invert", message: { invert: "invert" } },
         { selector: "#invert-reset", message: { invert: "reset" } },
-        { selector: "#button-play", message: { action: "play" } },
-        { selector: "#button-pause", message: { action: "pause" } },
-        { selector: "#button-resume", message: { action: "resume" } },
-        { selector: "#button-cancel", message: { action: "cancel" } },
       ];
 
       const addEventListener = (selector, message) => {

@@ -15,7 +15,7 @@ This extension acts as a **multipurpose accessibility extension**, these are the
 - Add **contrast**
 - **Invert colors**
 - Changes the **font** (Arial, OpenDyslexic, Atkinson Hyperlegible)
-- **Reproduce** the text of the page
+
 
 # Installation
 

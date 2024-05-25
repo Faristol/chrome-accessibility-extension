@@ -1,7 +1,5 @@
 const SIZES = ["small", "medium", "large", "x-large", "xx-large", "xxx-large"];
 const FONTS = ["arial", "opendyslexic", "hyperlegible"];
-let utterance = null;
-let synth = window.speechSynthesis;
 /*
 ->FUNCTIONS THAT OPERATES WITH THE CHROME STORAGE (read,write,remove)
 ->INITIAL CALL TO READ THE LOCAL STORAGE AND ADD THE STYLES STORED TOT THE CURRENT PAGE
@@ -98,34 +96,6 @@ chrome.runtime.onMessage.addListener((message) => {
   //isn't necessary make a loop for each key, cause there is only one
   const keys = Object.keys(message);
   const value = message[keys[0]];
-  //if user press play, stop ... handle it different
-  //reproduce normal text
-  if (keys[0] === "action") {
-    switch (value) {
-      case "play":
-        const text = extractText();
-        utterancePlay(text);
-        break;
-      case "pause":
-        if (utterance) {
-          synth.pause();
-        }
-        break;
-      case "resume":
-        if (utterance) {
-          synth.resume();
-        }
-        break;
-      case "cancel":
-        if (utterance) {
-          synth.cancel();
-          utterance = null;
-        }
-        break;
-    }
-
-    return;
-  }
   //reset style
   if (value === "reset") {
     resetProperty(keys[0]);
@@ -140,33 +110,6 @@ chrome.runtime.onMessage.addListener((message) => {
   writeLocalStorage(keys[0], value);
   //window.location.reload();
 });
-//this function retrieves all the text within the body removes extra spaces,
-// tabs, and line breaks, and returns the cleaned-up text as a single string
-function extractText() {
-  let text = document.querySelector("body").innerText;
-  return text.trim().replace(/\s+/g, " ");
-}
-//selects a voice matching the document's language and initiates speech synthesis with the provided text.
-// If no matching voice is found, it defaults to the first available voice.
-function utterancePlay(text) {
-  const voices = synth.getVoices();
-  const pageLang = document.documentElement.lang;
-  const voice = voices.find((voice) => {
-    const regex = new RegExp(pageLang.split("-")[0], "i");
-    return voice.lang.match(regex);
-  });
-  utterance = new SpeechSynthesisUtterance(text);
-  utterance.volume = 0.7;
-  utterance.rate = 0.8;
-  utterance.pitch = 1;
-  if (voice) {
-    utterance.voice = voice;
-    synth.speak(utterance);
-  } else {
-    utterance.voice = synth.getVoices()[0];
-    synth.speak(utterance);
-  }
-}
 function changeProperty(cssClass) {
   //in some pages, like wikipedia, the contrast don't work properly. To apply it, reload the page
   let elements = document.querySelectorAll("*");
