@@ -7,8 +7,7 @@
     "permissions": [
         "tabs",
         "storage",
-        "commands",
-        "windows"
+        "commands"
     ],
     "action": {
         "default_popup": "popup/accessibility.html",
